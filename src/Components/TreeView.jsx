@@ -2,7 +2,7 @@
 // dynamic navigation menu
 // tree view navigation
 
-import MenuList from "./MenuList";
+import MenuList from "./menuList";
 
 // firstly the tree view component gets called then
 // it further calls the MenuList

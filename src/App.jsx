@@ -1,14 +1,30 @@
-import { useState } from "react";
 import TreeView from "./Components/TreeView";
 import menus from "./Components/data";
+import "./index.css";
+import { useLocation } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
+      import {useLocation} from "react-router-dom";
       <TreeView menus={menus} />
+      <div style={{ marginLeft: "270px", padding: "2rem" }}>
+        <Routes>
+          <Route path="*" element={<Page />} />
+        </Routes>
+      </div>
     </>
+  );
+}
+function Page() {
+  const location = useLocation();
+
+  return (
+    <div>
+      <h1>Your current Page is: {location.pathname}</h1>
+      <p>This is the content for this route.</p>
+    </div>
   );
 }
 

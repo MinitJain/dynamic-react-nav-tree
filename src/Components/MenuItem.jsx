@@ -1,24 +1,35 @@
-import MenuList from "./MenuList";
+import MenuList from "./menuList";
 import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 const MenuItem = ({ item }) => {
-  const [isExpanded, setIsExpanded] = useState(false); // State for this item's children
+  const [isExpanded, setIsExpanded] = useState(false);
+  const location = useLocation();
+
+  const hasChildren = item?.children?.length > 0;
 
   const handleToggleChildren = () => {
     setIsExpanded(!isExpanded);
   };
 
+  const isActive = location.pathname.includes(item.to);
+
   return (
-    <li>
-      <div style={{ display: "flex", gap: "20px" }}>
-        <p>{item.label}</p>
-        {item && item.children?.length ? (
+    <li style={{ backgroundColor: isActive ? "#475569" : "transparent" }}>
+      <div>
+        <Link
+          to={item.to.startsWith("/") ? item.to : `/${item.to}`}
+          style={{ color: "#f1f5f9", textDecoration: "none", flex: 1 }}
+        >
+          <p>{item.label}</p>
+        </Link>
+
+        {hasChildren && (
           <span onClick={handleToggleChildren}>{isExpanded ? "-" : "+"}</span>
-        ) : null}
+        )}
       </div>
-      {item && item.children?.length > 0 && isExpanded ? (
-        <MenuList list={item.children} />
-      ) : null}
+
+      {hasChildren && isExpanded && <MenuList list={item.children} />}
     </li>
   );
 };
