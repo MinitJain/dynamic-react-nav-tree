@@ -22,8 +22,11 @@ function Page() {
 
   return (
     <div>
-      <h1>Your current Page is: {location.pathname}</h1>
-      <p>This is the content for this route.</p>
+      <h1>
+        Your current Page is:{" "}
+        {location.pathname === "/" ? "Home" : location.pathname.slice(1)}
+      </h1>
+      <h2> This is the content for this route.</h2>
     </div>
   );
 }
